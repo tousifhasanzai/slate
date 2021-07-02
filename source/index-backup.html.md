@@ -34,14 +34,14 @@ To get better understanding we have provided sample code along with the methods.
 
 ```php
 CURLOPT_HTTPHEADER => array(
-    'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+    'api-token: SDFOL3FOS23FGOS3423DNERE',
     'api-user: 152380'
     )
 ```
 
 ```javascript
  "headers": {
-    "api-token": "ABCDEF23DSOS4N)(dof3$!!@#%34",
+    "api-token": "SDFOL3FOS23FGOS3423DNERE",
     "api-user": "152380"
   }
 ```
@@ -52,7 +52,7 @@ CURLOPT_HTTPHEADER => array(
 Kindly contact our support to give you credentials. They will provide api-key and api-token. In each request you will have to
 pass these parameters in header
 
-`'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+`'api-token: SDFOL3FOS23FGOS3423DNERE',
      'api-user: 152380'`
 
 <aside class="notice">
@@ -81,7 +81,7 @@ var settings = {
   "method": "POST",
   "timeout": 0,
   "headers": {
-    "api-token": "ABCDEF23DSOS4N)(dof3$!!@#%34",
+    "api-token": "SDFOL3FOS23FGOS3423DNERE",
     "api-user": "152380"
   },
   "processData": false,
@@ -107,22 +107,9 @@ curl_setopt_array($curl, array(
   CURLOPT_FOLLOWLOCATION => true,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => 'POST',
-  CURLOPT_POSTFIELDS => array(
-        'orderId' => '90000989898',
-        'shippingAddress' => '294, Garden East',
-        'shippingZip' => '49800',
-        'shippingCity' => 'Karachi',
-        'shippingState' => 'Sindh',
-        'shippingCountry' => 'PK',
-        'customerPhone' => '03103434345',
-        'customerName' => 'Tousif Khan',
-        'products[0][qty]' => '1',
-        'products[0][price]' => '45.00',
-        'products[0][sku]' => '8445156687569',
-        'remarks' => 'This is my testing remarks for this order'
-),
+  CURLOPT_POSTFIELDS => array('orderId' => '90000989898','shippingAddress' => '294, Garden East','shippingZip' => '49800','shippingCity' => 'Karachi','shippingState' => 'Sindh','shippingCountry' => 'PK','customerPhone' => '03103434345','customerName' => 'Tousif Khan','products[0][qty]' => '1','products[0][price]' => '45.00','products[0][sku]' => '8445156687569','remarks' => 'This is my testing remarks for this order'),
   CURLOPT_HTTPHEADER => array(
-    'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+    'api-token: SDFOL3FOS23FGOS3423DNERE',
     'api-user: 152380'
   ),
 ));
@@ -177,5 +164,109 @@ remarks | No | Optional Remarks
 <aside class="success">
 Remember — Your order may contains more than 1 product in that case use array as described above
 </aside>
+
+## Get a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.get(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
+
+This endpoint retrieves a specific kitten.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to retrieve
+
+## Delete a Specific Kitten
+
+```ruby
+require 'kittn'
+
+api = Kittn::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```python
+import kittn
+
+api = kittn.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const kittn = require('kittn');
+
+let api = kittn.authorize('meowmeowmeow');
+let max = api.kittens.delete(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "deleted" : ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the kitten to delete
 
 
