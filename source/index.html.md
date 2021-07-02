@@ -177,5 +177,3 @@ remarks | No | Optional Remarks
 <aside class="success">
 Remember — Your order may contains more than 1 product in that case use array as described above
 </aside>
-
-
