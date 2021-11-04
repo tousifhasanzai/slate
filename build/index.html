@@ -327,6 +327,18 @@
               </ul>
           </li>
           <li>
+            <a href="#cancel-order" class="toc-h1 toc-link" data-title="Cancel Order">Cancel Order</a>
+          </li>
+          <li>
+            <a href="#warehouse-order-status" class="toc-h1 toc-link" data-title="Warehouse Order Status">Warehouse Order Status</a>
+          </li>
+          <li>
+            <a href="#return-order" class="toc-h1 toc-link" data-title="Return Order">Return Order</a>
+          </li>
+          <li>
+            <a href="#create-product" class="toc-h1 toc-link" data-title="Create Product">Create Product</a>
+          </li>
+          <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
@@ -342,7 +354,7 @@
 <p>Welcome to the docs Neem Pro. This document can be used to get clear understanding of how to call our WMS system and
 perform various activities.</p>
 
-<p>you may use our api to create product(s) on our sytem, inbound product(s) or change the stock quantity, Place the order,
+<p>you may use our api to create product(s) on our sytem, inbound product(s) or change the stock quantity, Place the order, 
 get trackings of any current or previous order and perform return activites.</p>
 
 <p>To get better understanding we have provided sample code along with the methods.</p>
@@ -531,6 +543,474 @@ You must replace <code>api-token</code> & <code>api-user</code> with your own cr
 <aside class="success">
 Remember — Your order may contains more than 1 product in that case use array as described above
 </aside>
+<h1 id='cancel-order'>Cancel Order</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">orderId</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">90000989898</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://api.neem.pro/order-cancel</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timeout</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">api-token</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABCDEF23DSOS4N)(dof3$!!@#%34</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">api-user</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">152380</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">processData</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">mimeType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">contentType</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="nx">form</span>
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://api.neem.pro/order-cancel'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'orderId'</span> <span class="o">=&gt;</span> <span class="s1">'90000989898'</span>
+<span class="p">),</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34'</span><span class="p">,</span>
+    <span class="s1">'api-user: 152380'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FS202172151711415646"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>When you have order successfully submitted to WMS system and now need to cancel that order.</p>
+
+<p><code>POST http://api.neem.pro/order-cancel</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>Yes</td>
+<td>order id of your system</td>
+</tr>
+</tbody></table>
+<h1 id='warehouse-order-status'>Warehouse Order Status</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">orderId</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">90000989898</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://api.neem.pro/order-status</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timeout</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">api-token</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABCDEF23DSOS4N)(dof3$!!@#%34</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">api-user</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">152380</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">processData</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">mimeType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">contentType</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="nx">form</span>
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://api.neem.pro/order-status'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'orderId'</span> <span class="o">=&gt;</span> <span class="s1">'90000989898'</span>
+<span class="p">),</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34'</span><span class="p">,</span>
+    <span class="s1">'api-user: 152380'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nl">"billType"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SO2021B4000006470"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"customerBillCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AKG000032024"</span><span class="p">,</span><span class="w">
+                </span><span class="nl">"list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1636005588000</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"createUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"operations@cis.com.pk"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"stateOccurTimeStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-04 12:59:48"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">27</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"statusDesc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Picking"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1636005416000</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"createUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FOP-SYSTEM"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"stateOccurTimeStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-04 12:56:56"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"statusDesc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Released to warehouse"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1636005415000</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"createUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tousif"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"stateOccurTimeStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-04 12:56:55"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"statusDesc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Initialized"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nl">"createTime"</span><span class="p">:</span><span class="w"> </span><span class="mi">1636005415000</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"createUser"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tousif"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"stateOccurTimeStr"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2021-11-04 12:56:55"</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+                        </span><span class="nl">"statusDesc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Initialized"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>When you have order successfully submitted to WMS system and now need to view the status.</p>
+
+<p><code>POST http://api.neem.pro/order-status</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>Yes</td>
+<td>order id of your system</td>
+</tr>
+</tbody></table>
+<h1 id='return-order'>Return Order</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">orderId</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">90000989898</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">trackingNumber</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">WR1965580</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">courier</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">rider</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://api.neem.pro/returns</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timeout</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">api-token</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABCDEF23DSOS4N)(dof3$!!@#%34</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">api-user</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">152380</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">processData</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">mimeType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">contentType</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="nx">form</span>
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://api.neem.pro/order-status'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'orderId'</span> <span class="o">=&gt;</span> <span class="s1">'90000989898'</span>
+        <span class="s1">'trackingNumber'</span> <span class="o">=&gt;</span> <span class="s1">'WR1965580'</span>
+        <span class="s1">'courier'</span> <span class="o">=&gt;</span> <span class="s1">'rider'</span>
+<span class="p">),</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34'</span><span class="p">,</span>
+    <span class="s1">'api-user: 152380'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FS202172151711415646"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>When you have order successfully Shipped from WMS system and now need to return.</p>
+
+<p><code>POST http://api.neem.pro/return</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderId</td>
+<td>Yes</td>
+<td>order id of your system</td>
+</tr>
+<tr>
+<td>trackingNumber</td>
+<td>Yes</td>
+<td>Tracking number of 3PL</td>
+</tr>
+<tr>
+<td>courier</td>
+<td>Yes</td>
+<td>3PL Name</td>
+</tr>
+</tbody></table>
+<h1 id='create-product'>Create Product</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">barCode</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">1000000100</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">sku</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12300009092</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Test CIS Product</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">highValueFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">easySpreadOdorFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">dangerProductFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">liquidFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">cosmeticFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">shelfLifeFlag</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">);</span>
+
+
+
+<span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">url</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">http://api.neem.pro/product-create</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">method</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">timeout</span><span class="dl">"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">headers</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">api-token</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">ABCDEF23DSOS4N)(dof3$!!@#%34</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">api-user</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">152380</span><span class="dl">"</span>
+  <span class="p">},</span>
+  <span class="dl">"</span><span class="s2">processData</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">mimeType</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">multipart/form-data</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">contentType</span><span class="dl">"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">data</span><span class="dl">"</span><span class="p">:</span> <span class="nx">form</span>
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">settings</span><span class="p">).</span><span class="nx">done</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
+
+<span class="nb">curl_setopt_array</span><span class="p">(</span><span class="nv">$curl</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+  <span class="no">CURLOPT_URL</span> <span class="o">=&gt;</span> <span class="s1">'http://api.neem.pro/product-create'</span><span class="p">,</span>
+  <span class="no">CURLOPT_RETURNTRANSFER</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_ENCODING</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="no">CURLOPT_MAXREDIRS</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="no">CURLOPT_TIMEOUT</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="no">CURLOPT_FOLLOWLOCATION</span> <span class="o">=&gt;</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="no">CURLOPT_HTTP_VERSION</span> <span class="o">=&gt;</span> <span class="no">CURL_HTTP_VERSION_1_1</span><span class="p">,</span>
+  <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
+  <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s1">'barCode'</span> <span class="o">=&gt;</span> <span class="s1">'1000000100'</span><span class="p">,</span>
+      <span class="s1">'sku'</span> <span class="o">=&gt;</span> <span class="s1">'12300009092'</span><span class="p">,</span>
+      <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'Test CIS Product'</span><span class="p">,</span>
+      <span class="s1">'highValueFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span><span class="p">,</span>
+      <span class="s1">'easySpreadOdorFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span><span class="p">,</span>
+      <span class="s1">'dangerProductFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span><span class="p">,</span>
+      <span class="s1">'liquidFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span><span class="p">,</span>
+      <span class="s1">'cosmeticFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span><span class="p">,</span>
+      <span class="s1">'shelfLifeFlag'</span> <span class="o">=&gt;</span> <span class="s1">'0'</span>
+<span class="p">),</span>
+  <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34'</span><span class="p">,</span>
+    <span class="s1">'api-user: 152380'</span>
+  <span class="p">),</span>
+<span class="p">));</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nb">curl_exec</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+
+<span class="nb">curl_close</span><span class="p">(</span><span class="nv">$curl</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$response</span><span class="p">;</span>
+</code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FS202172151711415646"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>To create a product on WMS system before getting inbound</p>
+
+<p><code>POST http://api.neem.pro/product-create</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>barCode</td>
+<td>required</td>
+<td>Product Barcode</td>
+</tr>
+<tr>
+<td>sku</td>
+<td>required</td>
+<td>SKU code</td>
+</tr>
+<tr>
+<td>name</td>
+<td>required</td>
+<td>Name of Product</td>
+</tr>
+<tr>
+<td>highValueFlag</td>
+<td>optional:boolean</td>
+<td>Expensive or not</td>
+</tr>
+<tr>
+<td>easySpreadOdorFlag</td>
+<td>optional:boolean</td>
+<td>Spread ordor</td>
+</tr>
+<tr>
+<td>dangerProductFlag</td>
+<td>optional:boolean</td>
+<td>Dangerous Product</td>
+</tr>
+<tr>
+<td>liquidFlag</td>
+<td>optional:boolean</td>
+<td>Liquid Product</td>
+</tr>
+<tr>
+<td>cosmeticFlag</td>
+<td>optional:boolean</td>
+<td>Cosmetics</td>
+</tr>
+<tr>
+<td>shelfLifeFlag</td>
+<td>optional:boolean</td>
+<td>Does this product has expiry</td>
+</tr>
+<tr>
+<td>shelfLifeDays</td>
+<td>required_with:shelfLifeFlag</td>
+<td>Days should remain in shelf</td>
+</tr>
+<tr>
+<td>advantDays</td>
+<td>required_with:shelfLifeFlag:integer</td>
+<td>No of Days for Expiry</td>
+</tr>
+<tr>
+<td>inboundShelfLifeThreshold</td>
+<td>required_with:shelfLifeFlag</td>
+<td>Goods are not allowed to take in if threshold reached</td>
+</tr>
+<tr>
+<td>outboundShelfLifeThreshold</td>
+<td>required_with:shelfLifeFlag</td>
+<td>Goods are not allowed to take out if threshold reached</td>
+</tr>
+<tr>
+<td>advantOutboundFlag</td>
+<td>required_with:shelfLifeFlag:boolean</td>
+<td>Allow sent out product if threshold reached</td>
+</tr>
+<tr>
+<td>expiredOutboundFlag</td>
+<td>required_with:shelfLifeFlag:boolean</td>
+<td>Allow sent out expired product</td>
+</tr>
+<tr>
+<td>shelfLifeAlarmDays</td>
+<td>required_with:shelfLifeFlag:integer</td>
+<td>No of days before shelf life alarm issue</td>
+</tr>
+<tr>
+<td>shelfLifeOutStockDays</td>
+<td>required_with:shelfLifeFlag:integer</td>
+<td>No of days during which products are allowed sent out</td>
+</tr>
+<tr>
+<td>shelfLifeInStockDays</td>
+<td>required_with:shelfLifeFlag:integer</td>
+<td>Required no. of days before expiration</td>
+</tr>
+<tr>
+<td>shelfLifeAdvantThreshold</td>
+<td>required_with:shelfLifeFlag</td>
+<td>Threshold for no. of days before expiration</td>
+</tr>
+</tbody></table>
 <h1 id='errors'>Errors</h1>
 <aside class="notice">
 This error section show some most common error responses user get from our system.
