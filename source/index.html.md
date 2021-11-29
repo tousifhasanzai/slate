@@ -462,8 +462,11 @@ Parameter | Required | Description
 --------- | ------- | -----------
 orderId | Yes | order id of your system
 trackingNumber | Yes | Tracking number of 3PL
-courier | Yes | 3PL Name
-
+courier | Yes | [lcs,tcs,rider]
+trackingNumber | Yes | courier tracking number    
+products[0][sku] | Yes | first returned Product: you can provide all return products in array form
+products[0][quantity] | Yes | first returned product quantity
+type | Yes | [return,partial_return]
 # Create Product
 
 ```javascript

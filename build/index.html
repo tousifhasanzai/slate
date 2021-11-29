@@ -822,7 +822,27 @@ Remember — Your order may contains more than 1 product in that case use array 
 <tr>
 <td>courier</td>
 <td>Yes</td>
-<td>3PL Name</td>
+<td>[lcs,tcs,rider]</td>
+</tr>
+<tr>
+<td>trackingNumber</td>
+<td>Yes</td>
+<td>courier tracking number</td>
+</tr>
+<tr>
+<td>products[0][sku]</td>
+<td>Yes</td>
+<td>first returned Product: you can provide all return products in array form</td>
+</tr>
+<tr>
+<td>products[0][quantity]</td>
+<td>Yes</td>
+<td>first returned product quantity</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Yes</td>
+<td>[return,partial_return]</td>
 </tr>
 </tbody></table>
 <h1 id='create-product'>Create Product</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
