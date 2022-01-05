@@ -172,6 +172,11 @@ customerName | Yes | Customer Name
 products[0][qty] | Yes | 1st Product Quantity
 products[0][price] | Yes | 1st Product Price
 products[0][sku] | Yes | 1st Product SKU Code
+products[0][discount] | Yes | if discount is applied to only specific product
+subTotal | Yes | Total Products amount excluding shipping fee and discounts
+cartDiscount | No | if there is any discount applied on entire order
+shippingFee | No| if there is any shipping fee applied on order
+amount | Yes | Total amount needs to be collected from customer this include shipping fee and discounts
 remarks | No | Optional Remarks
 
 <aside class="success">
