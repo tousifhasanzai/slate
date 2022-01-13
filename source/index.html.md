@@ -265,6 +265,95 @@ Parameter | Required | Description
 --------- | ------- | -----------
 orderId | Yes | order id of your system
 
+# Update Order
+
+```javascript
+var form = new FormData();
+form.append("orderId", "90000989898");
+form.append("shippingAddress", 'test address');
+            
+
+var settings = {
+  "url": "http://api.neem.pro/order-cancel",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "api-token": "ABCDEF23DSOS4N)(dof3$!!@#%34",
+    "api-user": "152380"
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```php
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'http://api.neem.pro/order-cancel',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array(
+        'orderId' => '90000989898',
+        'shippingAddress' => 'test address'
+),
+  CURLOPT_HTTPHEADER => array(
+    'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+    'api-user: 152380'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "response": {
+        "content": {
+            "errorCode": 200,
+            "errorMsg": "Operation successful",
+            "failed": false,
+            "success": true
+        },
+        "code": 0
+    }
+}
+```
+
+When you have order successfully submitted now you are allow to update customer address related fields.
+
+
+`POST http://api.neem.pro/order-update`
+
+
+
+Parameter | Required | Description
+--------- | ------- | -----------
+orderId | Yes | order id of your system
+shippingAddress | No | Shipping Address
+shippingCity | No | Shipping City
+shippingCountry | No | Shipping Country ISO-2
+customerPhone | No | Customer Shipping Phone
+customerName | No | Customer Name
+shippingState | No | Customer province/ State
+shippingZip | No | Customer Zip code
+
 # Warehouse Order Status
 
 ```javascript
