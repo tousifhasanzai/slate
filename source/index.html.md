@@ -339,7 +339,7 @@ echo $response;
 When you have order successfully submitted now you are allow to update customer address related fields.
 
 
-`POST http://api.neem.pro/order-update`
+`POST https://api.neem.pro/order-update`
 
 
 
@@ -361,7 +361,7 @@ var form = new FormData();
 form.append("orderId", "90000989898");
 
 var settings = {
-  "url": "http://api.neem.pro/order-status",
+  "url": "https://api.neem.pro/order-status",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -383,7 +383,7 @@ $.ajax(settings).done(function (response) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.neem.pro/order-status',
+  CURLOPT_URL => 'https://api.neem.pro/order-status',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -462,7 +462,7 @@ When you have order successfully submitted to WMS system and now need to view th
 
 
 
-`POST http://api.neem.pro/order-status`
+`POST https://api.neem.pro/order-status`
 
 
 
@@ -479,7 +479,7 @@ form.append("trackingNumber", "WR1965580");
 form.append("courier", "rider");
 
 var settings = {
-  "url": "http://api.neem.pro/returns",
+  "url": "https://api.neem.pro/returns",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -501,7 +501,7 @@ $.ajax(settings).done(function (response) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.neem.pro/order-status',
+  CURLOPT_URL => 'https://api.neem.pro/order-status',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -548,7 +548,7 @@ When you have order successfully Shipped from WMS system and now need to return.
 
 
 
-`POST http://api.neem.pro/return`
+`POST https://api.neem.pro/return`
 
 
 
@@ -561,6 +561,7 @@ trackingNumber | Yes | courier tracking number
 products[0][sku] | Yes | first returned Product: you can provide all return products in array form
 products[0][quantity] | Yes | first returned product quantity
 type | Yes | [return,partial_return]
+
 # Create Product
 
 ```javascript
@@ -578,7 +579,7 @@ form.append("shelfLifeFlag", "0");
 
 
 var settings = {
-  "url": "http://api.neem.pro/product-create",
+  "url": "https://api.neem.pro/product-create",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -600,7 +601,7 @@ $.ajax(settings).done(function (response) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.neem.pro/product-create',
+  CURLOPT_URL => 'https://api.neem.pro/product-create',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -653,7 +654,7 @@ To create a product on WMS system before getting inbound
 
 
 
-`POST http://api.neem.pro/product-create`
+`POST https://api.neem.pro/product-create`
 
 
 
@@ -678,3 +679,90 @@ shelfLifeAlarmDays | required_with:shelfLifeFlag:integer | No of days before she
 shelfLifeOutStockDays | required_with:shelfLifeFlag:integer | No of days during which products are allowed sent out
 shelfLifeInStockDays | required_with:shelfLifeFlag:integer | Required no. of days before expiration
 shelfLifeAdvantThreshold | required_with:shelfLifeFlag | Threshold for no. of days before expiration
+
+
+# Check Inventory
+
+```javascript
+var form = new FormData();
+form.append("sku", "12300009092");
+
+
+
+var settings = {
+  "url": "https://api.neem.pro/inventory-fetch",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "api-token": "ABCDEF23DSOS4N)(dof3$!!@#%34",
+    "api-user": "152380"
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```php
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.neem.pro/inventory-fetch',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array(
+      'sku' => '12300009092',
+),
+  CURLOPT_HTTPHEADER => array(
+    'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+    'api-user: 152380'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "response": {
+        "content": {
+            "success": true,
+            "failed": false,
+            "errorCode": 200,
+            "data": {
+                "sku": "8230310307378",
+                "name": "8230310307378-MARTIN POLO-MS1-M046-103-303",
+                "quantity": 4,
+                "goodsCode": "FG0000536901"
+            },
+            "errorMsg": "Operation successful"
+        }
+    }
+}
+```
+
+
+
+
+`POST https://api.neem.pro/inventory-fetch`
+
+
+
+Parameter | Required | Description
+--------- | ------- | -----------
+sku | required | SKU code
