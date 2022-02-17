@@ -342,7 +342,13 @@
             <a href="#create-product" class="toc-h1 toc-link" data-title="Create Product">Create Product</a>
           </li>
           <li>
+            <a href="#create-bulk-products" class="toc-h1 toc-link" data-title="Create Bulk Products">Create Bulk Products</a>
+          </li>
+          <li>
             <a href="#check-inventory" class="toc-h1 toc-link" data-title="Check Inventory">Check Inventory</a>
+          </li>
+          <li>
+            <a href="#postback-inbound" class="toc-h1 toc-link" data-title="Postback Inbound">Postback Inbound</a>
           </li>
           <li>
             <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
@@ -1177,6 +1183,37 @@ Remember — Your order may contains more than 1 product in that case use array 
 <td>Threshold for no. of days before expiration</td>
 </tr>
 </tbody></table>
+<h1 id='create-bulk-products'>Create Bulk Products</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code>
+</code></pre></div><div class="highlight"><pre class="highlight json tab-json"><code><span class="w">
+</span></code></pre></div>
+<p>To create bulk products on WMS system before getting inbound</p>
+
+<p><code>POST https://api.neem.pro/bulk-products-create</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>products[0][barCode]</td>
+<td>required</td>
+<td>Product Barcode</td>
+</tr>
+<tr>
+<td>products[0][sku]</td>
+<td>required</td>
+<td>SKU code</td>
+</tr>
+<tr>
+<td>products[0][name]</td>
+<td>required</td>
+<td>Name of Product</td>
+</tr>
+</tbody></table>
 <h1 id='check-inventory'>Check Inventory</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code><span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">();</span>
 <span class="nx">form</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="dl">"</span><span class="s2">sku</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">12300009092</span><span class="dl">"</span><span class="p">);</span>
 
@@ -1257,6 +1294,67 @@ Remember — Your order may contains more than 1 product in that case use array 
 <td>sku</td>
 <td>required</td>
 <td>SKU code</td>
+</tr>
+</tbody></table>
+<h1 id='postback-inbound'>Postback Inbound</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code>
+</code></pre></div><div class="highlight"><pre class="highlight php tab-php"><code>
+</code></pre></div>
+<blockquote>
+<p>We will notify you in following format</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>
+Array
+(
+    [0] =&gt; Array
+        (
+            [sku] =&gt; 10101A
+            [qty] =&gt; 8
+            [name] =&gt; Test Product 1
+            [type] =&gt; increase
+            [inboundCode] =&gt; PI20222H000000072
+        ),
+    [1] =&gt; Array
+        (
+            [sku] =&gt; 20202B
+            [qty] =&gt; 10
+            [name] =&gt; Test Product 3
+            [type] =&gt; increase
+            [inboundCode] =&gt; PI20222H000000072
+        )
+
+)
+
+
+</code></pre></div>
+<p>When Item physically received at our warehouse we will notify you received items with a quantities</p>
+
+<p><code>POST https://your-provided-url</code></p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>sku</td>
+<td>Your Provided Unique product code</td>
+</tr>
+<tr>
+<td>qty</td>
+<td>Quantity we received or inbounded at warehouse</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Name of Product</td>
+</tr>
+<tr>
+<td>type</td>
+<td>increase/decrease defines above quantity decreased or increased</td>
+</tr>
+<tr>
+<td>inboundCode</td>
+<td>our unique code to this innbounding process</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>

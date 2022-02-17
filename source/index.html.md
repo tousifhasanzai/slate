@@ -681,6 +681,37 @@ shelfLifeInStockDays | required_with:shelfLifeFlag:integer | Required no. of day
 shelfLifeAdvantThreshold | required_with:shelfLifeFlag | Threshold for no. of days before expiration
 
 
+# Create Bulk Products
+
+```javascript
+
+```
+
+```php
+
+```
+
+
+```json
+
+```
+
+To create bulk products on WMS system before getting inbound
+
+
+
+
+`POST https://api.neem.pro/bulk-products-create`
+
+
+
+Parameter | Required | Description
+--------- | ------- | -----------
+products[0][barCode] | required | Product Barcode
+products[0][sku] | required | SKU code
+products[0][name] | required | Name of Product
+
+
 # Check Inventory
 
 ```javascript
@@ -766,3 +797,58 @@ echo $response;
 Parameter | Required | Description
 --------- | ------- | -----------
 sku | required | SKU code
+
+
+# Postback Inbound
+
+```javascript
+
+```
+
+```php
+
+```
+> We will notify you in following format
+
+```array
+
+Array
+(
+    [0] => Array
+        (
+            [sku] => 10101A
+            [qty] => 8
+            [name] => Test Product 1
+            [type] => increase
+            [inboundCode] => PI20222H000000072
+        ),
+    [1] => Array
+        (
+            [sku] => 20202B
+            [qty] => 10
+            [name] => Test Product 3
+            [type] => increase
+            [inboundCode] => PI20222H000000072
+        )
+
+)
+
+
+```
+
+When Item physically received at our warehouse we will notify you received items with a quantities
+
+
+
+
+`POST https://your-provided-url`
+
+
+
+Parameter  | Description
+--------- | -----------
+sku | Your Provided Unique product code
+qty | Quantity we received or inbounded at warehouse
+name | Name of Product
+type | increase/decrease defines above quantity decreased or increased
+inboundCode | our unique code to this innbounding process
