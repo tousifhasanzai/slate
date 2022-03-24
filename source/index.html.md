@@ -190,7 +190,7 @@ var form = new FormData();
 form.append("orderId", "90000989898");
 
 var settings = {
-  "url": "http://api.neem.pro/order-cancel",
+  "url": "https://api.neem.pro/order-cancel",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -212,7 +212,7 @@ $.ajax(settings).done(function (response) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.neem.pro/order-cancel',
+  CURLOPT_URL => 'https://api.neem.pro/order-cancel',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -257,7 +257,7 @@ When you have order successfully submitted to WMS system and now need to cancel 
 
 
 
-`POST http://api.neem.pro/order-cancel`
+`POST https://api.neem.pro/order-cancel`
 
 
 
@@ -274,7 +274,7 @@ form.append("shippingAddress", 'test address');
             
 
 var settings = {
-  "url": "http://api.neem.pro/order-cancel",
+  "url": "https://api.neem.pro/order-cancel",
   "method": "POST",
   "timeout": 0,
   "headers": {
@@ -296,7 +296,7 @@ $.ajax(settings).done(function (response) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => 'http://api.neem.pro/order-cancel',
+  CURLOPT_URL => 'https://api.neem.pro/order-cancel',
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => '',
   CURLOPT_MAXREDIRS => 10,
@@ -353,6 +353,109 @@ customerPhone | No | Customer Shipping Phone
 customerName | No | Customer Name
 shippingState | No | Customer province/ State
 shippingZip | No | Customer Zip code
+
+
+# Order Status
+
+```javascript
+var form = new FormData();
+form.append("orderId", "90000989898");
+
+var settings = {
+  "url": "https://api.neem.pro/order-status",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "api-token": "ABCDEF23DSOS4N)(dof3$!!@#%34",
+    "api-user": "152380"
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+```
+
+```php
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://api.neem.pro/order-status',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS => array(
+        'orderId' => '90000989898'
+),
+  CURLOPT_HTTPHEADER => array(
+    'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
+    'api-user: 152380'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+echo $response;
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "response": {
+        "content": {
+            "success": true,
+            "failed": false,
+            "errorCode": 200,
+            "errorMsg": "Operation successful",
+            "data": {
+                "24": {
+                    "status": "Shipped",
+                    "time": "2022-02-08 12:38:57",
+                    "id": 24
+                },
+                "23": {
+                    "status": "Packed",
+                    "time": "2022-02-08 12:37:17",
+                    "id": 23
+                },
+                "21": {
+                    "status": "Picking started",
+                    "time": "2022-02-08 12:35:42",
+                    "id": 21
+                },
+                "10": {
+                    "status": "Initialized",
+                    "time": "2022-02-07 12:30:28",
+                    "id": 10
+                }
+            }
+        }
+    }
+}
+```
+
+This call may delay (max: 1 hour) the current status of order 
+
+
+
+
+`POST https://api.neem.pro/order-status`
+
+
+
+Parameter | Required | Description
+--------- | ------- | -----------
+orderId | Yes | order id of your system
 
 # Warehouse Order Status
 
