@@ -1350,6 +1350,8 @@ Remember — Your order may contains more than 1 product in that case use array 
   <span class="no">CURLOPT_CUSTOMREQUEST</span> <span class="o">=&gt;</span> <span class="s1">'POST'</span><span class="p">,</span>
   <span class="no">CURLOPT_POSTFIELDS</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
       <span class="s1">'sku'</span> <span class="o">=&gt;</span> <span class="s1">'12300009092'</span><span class="p">,</span>
+      <span class="s1">'pageNo'</span> <span class="o">=&gt;</span> <span class="s1">'1'</span><span class="p">,</span>
+
 <span class="p">),</span>
   <span class="no">CURLOPT_HTTPHEADER</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
     <span class="s1">'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34'</span><span class="p">,</span>
@@ -1368,20 +1370,26 @@ Remember — Your order may contains more than 1 product in that case use array 
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"response"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nl">"content"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000000181"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Woman . Clothing TOP"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"goodsCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FG000000001"</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">],</span><span class="w">
             </span><span class="nl">"errorCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-            </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8230310307378"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8230310307378-MARTIN POLO-MS1-M046-103-303"</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
-                </span><span class="nl">"goodsCode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FG0000536901"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
+            </span><span class="nl">"errorMsg"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Operation successful"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"failed"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"requestId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7eb03d8d-6f00-4942-8f52-c9eb845e6aea"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"success"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p>To check the inventory of your product at our warehouse, if you provide pageNo field then we will respond 100 sku in each page</p>
+
 <p><code>POST https://api.neem.pro/inventory-fetch</code></p>
 
 <table><thead>
@@ -1394,7 +1402,12 @@ Remember — Your order may contains more than 1 product in that case use array 
 <tr>
 <td>sku</td>
 <td>required</td>
-<td>SKU code</td>
+<td>SKU code or page No one is required</td>
+</tr>
+<tr>
+<td>pageNo</td>
+<td>required</td>
+<td>SKU code or page No one is required</td>
 </tr>
 </tbody></table>
 <h1 id='postback-inbound'>Postback Inbound</h1><div class="highlight"><pre class="highlight javascript tab-javascript"><code>

@@ -856,6 +856,8 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => 'POST',
   CURLOPT_POSTFIELDS => array(
       'sku' => '12300009092',
+      'pageNo' => '1',
+        
 ),
   CURLOPT_HTTPHEADER => array(
     'api-token: ABCDEF23DSOS4N)(dof3$!!@#%34',
@@ -875,22 +877,26 @@ echo $response;
 {
     "response": {
         "content": {
-            "success": true,
-            "failed": false,
+            "data": [
+                {
+                    "sku": "0000000181",
+                    "quantity": 29,
+                    "name": "Woman . Clothing TOP",
+                    "goodsCode": "FG000000001"
+                }
+            ],
             "errorCode": 200,
-            "data": {
-                "sku": "8230310307378",
-                "name": "8230310307378-MARTIN POLO-MS1-M046-103-303",
-                "quantity": 4,
-                "goodsCode": "FG0000536901"
-            },
-            "errorMsg": "Operation successful"
-        }
+            "errorMsg": "Operation successful",
+            "failed": false,
+            "requestId": "7eb03d8d-6f00-4942-8f52-c9eb845e6aea",
+            "success": true
+        },
+        "code": 0
     }
 }
 ```
 
-
+To check the inventory of your product at our warehouse, if you provide pageNo field then we will respond 100 sku in each page
 
 
 `POST https://api.neem.pro/inventory-fetch`
@@ -899,7 +905,9 @@ echo $response;
 
 Parameter | Required | Description
 --------- | ------- | -----------
-sku | required | SKU code
+sku | required | SKU code or page No one is required
+pageNo | required | SKU code or page No one is required
+
 
 
 # Postback Inbound
